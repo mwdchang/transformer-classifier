@@ -10,6 +10,10 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+data_folder = "tests"
+checkpoint_folder = data_folder + ".model"
+if not os.path.exists(checkpoint_folder):
+    os.makedirs(checkpoint_folder)
 
 tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
 
@@ -46,8 +50,8 @@ for epoch in range(3):  # Number of epochs
 
 
 # Save model and tokenizer
-model.save_pretrained("./my_model")
-tokenizer.save_pretrained("./my_model")
-with open(os.path.join("./my_model", "label2id.json"), "w") as f:
+model.save_pretrained(checkpoint_folder)
+tokenizer.save_pretrained(checkpoint_folder)
+with open(os.path.join(checkpoint_folder, "label_2_id.json"), "w") as f:
     json.dump(dataset.label_2_id, f, indent=2)
 

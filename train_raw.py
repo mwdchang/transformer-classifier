@@ -9,9 +9,14 @@ from transformers import AutoTokenizer
 from simple_transformer_classifier import SimpleTransformerClassifier
 from source_data import SourceCodeDataset
 
+data_folder = "tests"
+checkpoint_folder = data_folder + ".model"
+if not os.path.exists(checkpoint_folder):
+    os.makedirs(checkpoint_folder)
+
 # Input setup
 tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
-dataset = SourceCodeDataset("test", tokenizer)
+dataset = SourceCodeDataset(data_folder, tokenizer)
 train_loader = DataLoader(dataset, batch_size=8, shuffle=True)
 
 # Model setup
@@ -53,8 +58,8 @@ for epoch in range(3):
 
 # Save model and tokenizer
 # model.save_pretrained("./my_model")
-torch.save(model.state_dict(), "./my_model/model.pt")
-tokenizer.save_pretrained("./my_model")
-with open(os.path.join("./my_model", "label2id.json"), "w") as f:
+torch.save(model.state_dict(), os.path.join(checkpoint_folder, "model.pt"))
+tokenizer.save_pretrained(checkpoint_folder)
+with open(os.path.join(checkpoint_folder, "label_2_id.json"), "w") as f:
     json.dump(dataset.label_2_id, f, indent=2)
 

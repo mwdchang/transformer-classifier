@@ -3,11 +3,18 @@ import json
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
+
+checkpoint_folder = "tests.model"
+
 # Load model and tokenizer
-model = AutoModelForSequenceClassification.from_pretrained("./my_model", use_safetensors=True)
-tokenizer = AutoTokenizer.from_pretrained("./my_model")
+model = AutoModelForSequenceClassification.from_pretrained(
+    checkpoint_folder,
+    use_safetensors=True
+)
+tokenizer = AutoTokenizer.from_pretrained(checkpoint_folder)
+
 id_2_label = {}
-with open("./my_model/label2id.json", "r") as f:
+with open(os.path.join(checkpoint_folder, "label_2_id.json"), "r") as f:
     id_2_label = json.load(f)
 
 model.eval()  # Set to eval mode

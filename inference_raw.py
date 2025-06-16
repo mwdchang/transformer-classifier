@@ -5,7 +5,9 @@ from transformers import AutoTokenizer
 
 from simple_transformer_classifier import SimpleTransformerClassifier
 
-tokenizer = AutoTokenizer.from_pretrained("./my_model")
+checkpoint_folder = "tests.model"
+
+tokenizer = AutoTokenizer.from_pretrained(checkpoint_folder)
 model = SimpleTransformerClassifier(
     vocab_size = tokenizer.vocab_size,
     embed_dim = 128,
@@ -15,13 +17,13 @@ model = SimpleTransformerClassifier(
 )
 
 # Load model state
-model.load_state_dict(torch.load("./my_model/model.pt"))
+model.load_state_dict(torch.load(os.path.join(checkpoint_folder, "model.pt")))
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 model.eval()
 
 id_2_label = {}
-with open("./my_model/label2id.json", "r") as f:
+with open(os.path.join(checkpoint_folder, "label_2_id.json"), "r") as f:
     id_2_label = json.load(f)
 
 
@@ -43,4 +45,4 @@ def predict(code_snippet):
         return id_2_label[str(predicted_class)]
 
 # Example usage
-print(predict("def foo(x): return x + 1"))
+print("prediction is " + predict("def foo(x): return x + 1"))
