@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import torch
 from torch import nn
@@ -9,7 +10,10 @@ from transformers import AutoTokenizer
 from simple_transformer_classifier import SimpleTransformerClassifier
 from source_data import SourceCodeDataset
 
-data_folder = "tests"
+if len(sys.argv) != 2:
+    raise ValueError("Usage: python train_raw.py <data_folder>")
+data_folder = sys.argv[1]
+
 checkpoint_folder = data_folder + ".model"
 if not os.path.exists(checkpoint_folder):
     os.makedirs(checkpoint_folder)

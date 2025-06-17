@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 from transformers import (
     AutoTokenizer, 
@@ -10,7 +11,11 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-data_folder = "tests"
+if len(sys.argv) != 2:
+    raise ValueError("Usage: python train.py <data_folder>")
+data_folder = sys.argv[1]
+
+
 checkpoint_folder = data_folder + ".model"
 if not os.path.exists(checkpoint_folder):
     os.makedirs(checkpoint_folder)

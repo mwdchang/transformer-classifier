@@ -2,6 +2,44 @@
 A transformer based classifier that conveniently uses your file system as training datasets, all you need is to place data into appropriatedly named folders.
 
 
+## Setting up and running the classifier
+Create a folder with subfolders, each representing a class, for example a cuisine classifier:
+
+```
+receipes
+  |- vietnamese
+    |- pho.txt
+    |- banhmi.txt
+    |- ...
+  |- spanish
+    |- paella.txt
+    |- gazpacho.txt
+    |- ...
+  |- icelandic
+    |- ...
+```
+
+Once you have a good sized sample, you can run the training and inference processes
+
+Either with a pre-trained model:
+```bash
+# train
+python train.py receipes
+
+
+# inference
+python inference.py
+```
+
+Or from the grounds up:
+```bash
+# train
+python train_raw.py receipes
+
+# inference
+python inference_raw.py
+```
+
 
 
 ## Notes
