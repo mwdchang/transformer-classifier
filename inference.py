@@ -5,14 +5,14 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
 
-if len(sys.argv) != 2:
-    raise ValueError("Usage: python inference.py <path_to_file>")
+if len(sys.argv) != 3:
+    raise ValueError("Usage: python inference.py <path_to_check_point> <path_to_file>")
 
 test_str = ""
-with open(sys.argv[1], "r") as f:
+with open(sys.argv[2], "r") as f:
     test_str = f.read()
 
-checkpoint_folder = "tests.model"
+checkpoint_folder = sys.argv[1]
 
 # Load model and tokenizer
 model = AutoModelForSequenceClassification.from_pretrained(

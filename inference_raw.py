@@ -7,15 +7,15 @@ from transformers import AutoTokenizer
 from simple_transformer_classifier import SimpleTransformerClassifier
 
 
-if len(sys.argv) != 2:
-    raise ValueError("Usage: python inference_raw.py <path_to_file>")
+if len(sys.argv) != 3:
+    raise ValueError("Usage: python inference_raw.py <path_to_checkpoint> <path_to_file>")
 
 test_str = ""
-with open(sys.argv[1], "r") as f:
+with open(sys.argv[2], "r") as f:
     test_str = f.read()
 
 
-checkpoint_folder = "tests.model"
+checkpoint_folder = sys.argv[1]
 
 tokenizer = AutoTokenizer.from_pretrained(checkpoint_folder)
 

@@ -21,23 +21,29 @@ receipes
 
 Once you have a good sized sample, you can run the training and inference processes
 
-Either with a pre-trained model:
-```bash
-# train
+Either train with a pre-trained model or from scratch
+
+```
+# pre-trained
+#  python train.py <data_folder>
 python train.py receipes
 
-
-# inference
-python inference.py <path_to_test_file>
-```
-
-Or from the grounds up:
-```bash
-# train
+# from scratch
+#  python train_raw.py <data_folder>
 python train_raw.py receipes
 
-# inference
-python inference_raw.py <path_to_test_file>
+```
+
+Once training is complete, it will dump the model config/parameters into a checkpoint folder, in this example `receipes.model` that you can then use for inference.
+
+```
+# inference with pre-trained
+#   python inference.py <path_to_checkpoint> <path_to_file>
+python inference.py receipes.model ~/bibimbap.txt
+
+# inference with 
+#   python inference_raw.py <path_to_checkpoint> <path_to_file>
+python inference_raw.py receipes.model ~/bibimbap.txt
 ```
 
 
