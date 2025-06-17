@@ -49,13 +49,9 @@ python inference_raw.py receipes.model ~/bibimbap.txt
 
 
 ## Notes
-The dependency setup is a bit strange to accommodate hardware constraints, it looks like the highest version of torch I can use is version 2.2.2 (See https://discuss.pytorch.org/t/pip3-install-torch-locked-on-2-2-2/218086).
+The dependency setup is a bit strange to accommodate hardware constraints on an intel-mac.
+- See https://discuss.pytorch.org/t/pip3-install-torch-locked-on-2-2-2/218086)
 
-As a result there are a few other constraints to get things to work.
-- transformers==4.39.3
-- numpy==1.26.4
+As a result `requirements.txt` uses older versions to get packages to work nicely with each other, likewise there were a few limiting factors in using huggingface models like safe-tensors.
 
-As well a few constraints on huggingface models such as safe-tensors.
-
-If you have a silicon-mac, or other hardware, you can probably just install the latest versions of everything.
-
+If you have different hardware, you may want (or need) to install the latest packages.
