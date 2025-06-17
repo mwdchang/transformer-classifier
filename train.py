@@ -18,7 +18,7 @@ if not os.path.exists(checkpoint_folder):
 tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
 
 dataset = SourceCodeDataset("test", tokenizer)
-train_loader = DataLoader(dataset, batch_size=8, shuffle=True)
+train_loader = DataLoader(dataset, batch_size=12, shuffle=True)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = AutoModelForSequenceClassification.from_pretrained(
@@ -31,7 +31,7 @@ model.to(device)
 
 optimizer = AdamW(model.parameters(), lr=1e-5)
 model.train()
-for epoch in range(3):  # Number of epochs
+for epoch in range(8):  # Number of epochs
     total_loss = 0
     for batch in tqdm(train_loader):
         input_ids = batch['input_ids'].to(device)

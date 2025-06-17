@@ -8,12 +8,17 @@ from simple_transformer_classifier import SimpleTransformerClassifier
 checkpoint_folder = "tests.model"
 
 tokenizer = AutoTokenizer.from_pretrained(checkpoint_folder)
+
+classifier_config = {}
+with open(os.path.join(checkpoint_folder, "classifier_config.json"), "r") as f:
+    classifier_config = json.load(f)
+
 model = SimpleTransformerClassifier(
-    vocab_size = tokenizer.vocab_size,
-    embed_dim = 128,
-    num_heads = 4,
-    num_layers = 2,
-    num_classes = 2
+    vocab_size = classifier_config["vocab_size"],
+    embed_dim = classifier_config["embed_dim"],
+    num_heads = classifier_config["num_heads"],
+    num_layers = classifier_config["num_layers"],
+    num_classes = classifier_config["num_classes"]
 )
 
 # Load model state
@@ -45,4 +50,9 @@ def predict(code_snippet):
         return id_2_label[str(predicted_class)]
 
 # Example usage
-print("prediction is " + predict("def foo(x): return x + 1"))
+code_sample = """
+def add(a, b):
+    return a + b
+"""
+
+print("prediction is " + predict(code_sample))

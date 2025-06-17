@@ -11,16 +11,19 @@ class SourceCodeDataset(Dataset):
         self.num_classes = 0
         self.label_2_id = {}
 
+        total_files = 0
         for label, class_dir in enumerate(os.listdir(folder_path)):
             self.num_classes = self.num_classes + 1
             self.label_2_id[label] = class_dir
         
             class_path = os.path.join(folder_path, class_dir)
             for filename in os.listdir(class_path):
+                total_files = total_files + 1
                 file_path = os.path.join(class_path, filename)
                 with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                     code = f.read()
                 self.samples.append((code, label))
+        print(f"\n\n There are {total_files} files \n\n")
 
     def __len__(self):
         return len(self.samples)
