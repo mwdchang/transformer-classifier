@@ -22,7 +22,7 @@ if not os.path.exists(checkpoint_folder):
 
 tokenizer = AutoTokenizer.from_pretrained("microsoft/codebert-base")
 
-dataset = SourceCodeDataset("test", tokenizer)
+dataset = SourceCodeDataset(data_folder, tokenizer)
 train_loader = DataLoader(dataset, batch_size=12, shuffle=True)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -1,9 +1,19 @@
+import sys
 import os
 import json
 import torch
 from transformers import AutoTokenizer 
 
 from simple_transformer_classifier import SimpleTransformerClassifier
+
+
+if len(sys.argv) != 2:
+    raise ValueError("Usage: python inference_raw.py <path_to_file>")
+
+test_str = ""
+with open(sys.argv[1], "r") as f:
+    test_str = f.read()
+
 
 checkpoint_folder = "tests.model"
 
@@ -50,9 +60,9 @@ def predict(code_snippet):
         return id_2_label[str(predicted_class)]
 
 # Example usage
-code_sample = """
-def add(a, b):
-    return a + b
-"""
+# code_sample = """
+# def add(a, b):
+#     return a + b
+# """
 
-print("prediction is " + predict(code_sample))
+print("prediction is " + predict(test_str))

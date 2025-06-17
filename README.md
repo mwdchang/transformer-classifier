@@ -28,7 +28,7 @@ python train.py receipes
 
 
 # inference
-python inference.py
+python inference.py <path_to_test_file>
 ```
 
 Or from the grounds up:
@@ -37,7 +37,7 @@ Or from the grounds up:
 python train_raw.py receipes
 
 # inference
-python inference_raw.py
+python inference_raw.py <path_to_test_file>
 ```
 
 

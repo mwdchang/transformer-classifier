@@ -1,8 +1,16 @@
+import sys
 import os
 import json
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
+
+if len(sys.argv) != 2:
+    raise ValueError("Usage: python inference.py <path_to_file>")
+
+test_str = ""
+with open(sys.argv[1], "r") as f:
+    test_str = f.read()
 
 checkpoint_folder = "tests.model"
 
@@ -20,14 +28,14 @@ with open(os.path.join(checkpoint_folder, "label_2_id.json"), "r") as f:
 model.eval()  # Set to eval mode
 
 
-code_sample = """
-def add(a, b):
-    return a + b
-"""
+# code_sample = """
+# def add(a, b):
+#     return a + b
+# """
 
 # Tokenize input
 inputs = tokenizer(
-    code_sample,
+    test_str,
     return_tensors="pt",
     truncation=True,
     padding="max_length",
