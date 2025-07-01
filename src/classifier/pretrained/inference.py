@@ -27,12 +27,6 @@ with open(os.path.join(checkpoint_folder, "label_2_id.json"), "r") as f:
 
 model.eval()  # Set to eval mode
 
-
-# code_sample = """
-# def add(a, b):
-#     return a + b
-# """
-
 # Tokenize input
 inputs = tokenizer(
     test_str,
@@ -41,7 +35,6 @@ inputs = tokenizer(
     padding="max_length",
     max_length=512
 )
-
 
 # Forward pass (inference)
 with torch.no_grad():

@@ -6,9 +6,8 @@ from torch import nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from transformers import AutoTokenizer
-
-from simple_transformer_classifier import SimpleTransformerClassifier
-from source_data import SourceCodeDataset
+from .simple_transformer_classifier import SimpleTransformerClassifier
+from classifier.common.source_data import SourceCodeDataset
 
 if len(sys.argv) != 2:
     raise ValueError("Usage: python train_raw.py <data_folder>")

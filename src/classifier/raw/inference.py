@@ -3,7 +3,6 @@ import os
 import json
 import torch
 from transformers import AutoTokenizer 
-
 from simple_transformer_classifier import SimpleTransformerClassifier
 
 
@@ -58,11 +57,5 @@ def predict(code_snippet):
         logits = model(input_ids, attention_mask)
         predicted_class = torch.argmax(logits, dim=1).item()
         return id_2_label[str(predicted_class)]
-
-# Example usage
-# code_sample = """
-# def add(a, b):
-#     return a + b
-# """
 
 print("prediction is " + predict(test_str))
