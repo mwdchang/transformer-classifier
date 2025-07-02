@@ -46,6 +46,37 @@ python -m transform_classifier.pretrained.inference.py <data_folder.model> ~/bib
 python -m transform_classifier.raw.inference.py <data_folder.model> ~/bibimbap.txt
 ```
 
+## Package install
+To install as a python package, run
+
+```
+pip install .
+```
+
+Then access the `transform_classifier` package. For example:
+
+```python
+from transform_classifier.raw.inference import run_inference
+
+text = """
+## Ingredients
+- 2 slices white bread  
+- 1 tsp Dijon mustard (optional)  
+- 2 slices ham  
+- ½ cup grated Gruyère or Emmental  
+- Butter
+
+## Instructions
+1. Butter one side of each bread slice.  
+2. On the non-buttered side, spread mustard, layer ham and cheese.  
+3. Close the sandwich, buttered sides out.  
+4. Toast in a skillet over medium heat until golden on both sides and cheese is melted (about 3–4 min per side).  
+"""
+
+result = run_inference("receipes.model", text)
+print(f"Inferenced cuisine={result}")
+```
+
 
 
 ## Notes
